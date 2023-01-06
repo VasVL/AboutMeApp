@@ -15,10 +15,13 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding // Здесь я так понял тип генерится сам из названия layout-файла
 
+    private val myName: MyName = MyName("Who's ready for tomorrow?")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.myName = myName
 
 //        findViewById<Button>(R.id.done_button).setOnClickListener {
 //            addNickname(it)
@@ -37,7 +40,8 @@ class MainActivity : AppCompatActivity() {
 //        view.visibility = View.GONE
 //        nicknameTextView.visibility = View.VISIBLE
         binding.apply {
-            nicknameText.text = binding.nicknameEdit.text
+            //nicknameText.text = binding.nicknameEdit.text
+            myName?.nickname = nicknameEdit.text.toString()
             invalidateAll() // to refresh the UI with new data
             nicknameEdit.visibility = View.GONE
             doneButton.visibility = View.GONE
